@@ -15,6 +15,7 @@ namespace EFCoreSample.Data.Configurations
             builder.Property(p => p.Cep).HasColumnType("CHAR(8)").IsRequired();
             builder.Property(p => p.Estado).HasColumnType("CHAR(2)").IsRequired();
             builder.Property(p => p.Cidade).HasColumnType("VARCHAR(100)");
+            builder.Property(p => p.Email).HasMaxLength(80).IsRequired();
 
             builder.HasIndex(p => p.Telefone).HasName("idx_cliente_telefone");
         }
