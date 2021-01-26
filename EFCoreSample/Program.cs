@@ -9,7 +9,8 @@ namespace EFCore
     {
         static void Main(string[] args)
         {
-            InserirDados();            
+            // InserirDados();
+            InserirDadosEmMassa();
         }
 
         private static void InserirDados()
@@ -29,6 +30,34 @@ namespace EFCore
             // db.Entry(produto).State = EntityState.Added;
             // db.Add(produto);
             
+            var registros = db.SaveChanges();
+            Console.WriteLine($"Total Registros: {registros}");
+        }
+
+        private static void InserirDadosEmMassa()
+        {
+            var produto = new Produto
+            {
+                Descricao = "Produto Y",
+                Valor = 12m,
+                Tipo = TipoProduto.Embalagem,
+                Ativo = false
+            };
+
+            var cliente = new Cliente
+            {
+                Nome = "Weverton Paulino",
+                Telefone = "45999385030",
+                Cep = "85875000",
+                Cidade = "Santa Terezinha de Itaipu",
+                Estado = "PR",
+                Email = "wevertoncesar@gmail.com"
+            };
+
+            using var db = new ApplicationContext();
+
+            db.AddRange(produto, cliente);
+
             var registros = db.SaveChanges();
             Console.WriteLine($"Total Registros: {registros}");
         }
