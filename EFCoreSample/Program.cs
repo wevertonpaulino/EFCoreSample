@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using EFCoreSample.Data;
 using EFCoreSample.Domain;
 using EFCoreSample.ValueObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore
 {
@@ -10,7 +12,8 @@ namespace EFCore
         static void Main(string[] args)
         {
             // InserirDados();
-            InserirDadosEmMassa();
+            // InserirDadosEmMassa();
+            ConsultarDados();
         }
 
         private static void InserirDados()
@@ -60,6 +63,25 @@ namespace EFCore
 
             var registros = db.SaveChanges();
             Console.WriteLine($"Total Registros: {registros}");
+        }
+
+        private static void ConsultarDados()
+        {
+            using var db = new ApplicationContext();
+
+            // var consultaPorSintaxe = (from c in db.Clientes where c.Id > 0 select c).ToList();
+            var consultaPorMetodo = db.Produtos
+                                        .Where(p => p.Id > 0)
+                                        .OrderBy(p => p.Id)
+                                        .ToList();
+            // var consultaPorMetodo = db.Produtos.AsNoTracking().Where(p => p.Id > 0).ToList();
+
+            foreach (var produto in consultaPorMetodo)
+            {
+                Console.WriteLine($"Consultando Produto: {produto.Id}");
+                // db.Produtos.Find(produto.Id);
+                db.Produtos.FirstOrDefault(p => p.Id == produto.Id);
+            }
         }
     }
 }
