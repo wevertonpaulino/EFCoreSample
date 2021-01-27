@@ -16,7 +16,8 @@ namespace EFCore
             // InserirDadosEmMassa();
             // ConsultarDados();
             // CadastrarPedido();
-            ConsultarPedidoEagerLoading();
+            // ConsultarPedidoEagerLoading();
+            AtualizarDados();
         }
 
         private static void InserirDados()
@@ -126,6 +127,19 @@ namespace EFCore
                                 .ToList();
 
             Console.WriteLine(pedidos.Count());
+        }
+
+        private static void AtualizarDados()
+        {
+            using var db = new ApplicationContext();
+
+            var cliente = db.Clientes.Find(1);
+            cliente.Email = "wevertoncesar@outlook.com";
+
+            // db.Clientes.Update(cliente);
+            // db.Entry(cliente).State = EntityState.Modified;
+            
+            db.SaveChanges();
         }
     }
 }
