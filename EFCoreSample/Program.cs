@@ -79,7 +79,10 @@ namespace EFCore
                                         .Where(p => p.Id > 0)
                                         .OrderBy(p => p.Id)
                                         .ToList();
-            // var consultaPorMetodo = db.Produtos.AsNoTracking().Where(p => p.Id > 0).ToList();
+            // var consultaPorMetodo = db.Produtos
+            //                             .AsNoTracking()
+            //                             .Where(p => p.Id > 0)
+            //                             .ToList();
 
             foreach (var produto in consultaPorMetodo)
             {
