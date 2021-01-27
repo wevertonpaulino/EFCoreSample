@@ -15,7 +15,8 @@ namespace EFCore
             // InserirDados();
             // InserirDadosEmMassa();
             // ConsultarDados();
-            CadastrarPedido();
+            // CadastrarPedido();
+            ConsultarPedidoEagerLoading();
         }
 
         private static void InserirDados()
@@ -103,7 +104,7 @@ namespace EFCore
                 {
                     new PedidoItem
                     {
-                        ProdudoId = produto.Id,
+                        ProdutoId = produto.Id,
                         Quantidade = 1,
                         Valor = 5,
                         Desconto = 0
@@ -113,6 +114,18 @@ namespace EFCore
 
             db.Pedidos.Add(pedido);
             db.SaveChanges();
+        }
+
+        private static void ConsultarPedidoEagerLoading()
+        {
+            using var db = new ApplicationContext();
+
+            var pedidos = db.Pedidos
+                                .Include(p => p.Itens)
+                                .ThenInclude(p => p.Produto)
+                                .ToList();
+
+            Console.WriteLine(pedidos.Count());
         }
     }
 }
