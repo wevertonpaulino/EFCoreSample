@@ -17,7 +17,8 @@ namespace EFCoreSample.Data
         {
             optionsBuilder
                 .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EFCoreSample;Integrated Security=true;",
-                    p => p.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(5), errorNumbersToAdd: null))
+                    p => p.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(5), errorNumbersToAdd: null)
+                    .MigrationsHistoryTable("HistoricoMigracoes"))
                 .UseLoggerFactory(_logger)
                 .EnableSensitiveDataLogging();
 
