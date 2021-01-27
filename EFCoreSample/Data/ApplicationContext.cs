@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using EFCoreSample.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,8 @@ namespace EFCoreSample.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EFCoreSample;Integrated Security=true;")
+                .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EFCoreSample;Integrated Security=true;",
+                    p => p.EnableRetryOnFailure(maxRetryCount: 2, maxRetryDelay: TimeSpan.FromSeconds(5), errorNumbersToAdd: null))
                 .UseLoggerFactory(_logger)
                 .EnableSensitiveDataLogging();
 
