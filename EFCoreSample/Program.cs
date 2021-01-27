@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EFCoreSample.Data;
 using EFCoreSample.Domain;
@@ -13,7 +14,8 @@ namespace EFCore
         {
             // InserirDados();
             // InserirDadosEmMassa();
-            ConsultarDados();
+            // ConsultarDados();
+            CadastrarPedido();
         }
 
         private static void InserirDados()
@@ -82,6 +84,35 @@ namespace EFCore
                 // db.Produtos.Find(produto.Id);
                 db.Produtos.FirstOrDefault(p => p.Id == produto.Id);
             }
+        }
+
+        private static void CadastrarPedido()
+        {
+            using var db = new ApplicationContext();
+
+            var cliente = db.Clientes.FirstOrDefault();
+            var produto = db.Produtos.FirstOrDefault();
+
+            var pedido = new Pedido
+            {
+                ClienteId = cliente.Id,
+                TipoFrete = TipoFrete.CIF,
+                Status = StatusPedido.EmAnalise,
+                Observacao = "Pedido Teste",
+                Itens = new List<PedidoItem>
+                {
+                    new PedidoItem
+                    {
+                        ProdudoId = produto.Id,
+                        Quantidade = 1,
+                        Valor = 5,
+                        Desconto = 0
+                    }
+                }
+            };
+
+            db.Pedidos.Add(pedido);
+            db.SaveChanges();
         }
     }
 }
