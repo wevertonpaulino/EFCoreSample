@@ -18,7 +18,8 @@ namespace EFCore
             // CadastrarPedido();
             // ConsultarPedidoEagerLoading();
             // AtualizarDados();
-            AtualizarDadosDesconectados();
+            // AtualizarDadosDesconectados();
+            RemoverDados();
         }
 
         private static void InserirDados()
@@ -46,20 +47,20 @@ namespace EFCore
         {
             var produto = new Produto
             {
-                Descricao = "Produto Y",
-                Valor = 12m,
-                Tipo = TipoProduto.Embalagem,
-                Ativo = false
+                Descricao = "Produto Z",
+                Valor = 17m,
+                Tipo = TipoProduto.Servico,
+                Ativo = true
             };
 
             var cliente = new Cliente
             {
-                Nome = "Weverton Paulino",
-                Telefone = "45999385030",
-                Cep = "85875000",
-                Cidade = "Santa Terezinha de Itaipu",
-                Estado = "PR",
-                Email = "wevertoncesar@gmail.com"
+                Nome = "Cliente Teste",
+                Telefone = "11111111111",
+                Cep = "22222222",
+                Cidade = "João Pessoa",
+                Estado = "PB",
+                Email = "wevertoncesar@hotmail.com"
             };
 
             using var db = new ApplicationContext();
@@ -165,6 +166,18 @@ namespace EFCore
 
             db.Attach(cliente);
             db.Entry(cliente).CurrentValues.SetValues(clienteDesconectado);
+            db.SaveChanges();
+        }
+
+        private static void RemoverDados()
+        {
+            using var db = new ApplicationContext();
+
+            var cliente = db.Clientes.Find(2);
+            
+            // db.Clientes.Remove(cliente);
+            // db.Remove(cliente);
+            db.Entry(cliente).State = EntityState.Deleted;
             db.SaveChanges();
         }
     }
