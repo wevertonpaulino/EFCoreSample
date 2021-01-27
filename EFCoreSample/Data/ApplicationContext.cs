@@ -14,7 +14,7 @@ namespace EFCoreSample.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=EFCore;Integrated Security=true;")
+                .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EFCoreSample;Integrated Security=true;")
                 .UseLoggerFactory(_logger)
                 .EnableSensitiveDataLogging();
 
