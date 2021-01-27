@@ -19,7 +19,8 @@ namespace EFCore
             // ConsultarPedidoEagerLoading();
             // AtualizarDados();
             // AtualizarDadosDesconectados();
-            RemoverDados();
+            // RemoverDados();
+            RemoverDadosDesconectados();
         }
 
         private static void InserirDados()
@@ -178,6 +179,16 @@ namespace EFCore
             // db.Clientes.Remove(cliente);
             // db.Remove(cliente);
             db.Entry(cliente).State = EntityState.Deleted;
+            db.SaveChanges();
+        }
+
+        private static void RemoverDadosDesconectados()
+        {
+            using var db = new ApplicationContext();
+
+            var produto = new Produto { Id = 3 };
+            
+            db.Entry(produto).State = EntityState.Deleted;
             db.SaveChanges();
         }
     }
