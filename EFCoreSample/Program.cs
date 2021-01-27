@@ -17,7 +17,8 @@ namespace EFCore
             // ConsultarDados();
             // CadastrarPedido();
             // ConsultarPedidoEagerLoading();
-            AtualizarDados();
+            // AtualizarDados();
+            AtualizarDadosDesconectados();
         }
 
         private static void InserirDados()
@@ -138,7 +139,29 @@ namespace EFCore
 
             // db.Clientes.Update(cliente);
             // db.Entry(cliente).State = EntityState.Modified;
-            
+
+            db.SaveChanges();
+        }
+
+        private static void AtualizarDadosDesconectados()
+        {
+            using var db = new ApplicationContext();
+
+            // var cliente = db.Clientes.Find(1);
+            var cliente = new Cliente
+            {
+                Id = 1
+            };
+
+            // Objeto anônimo
+            var clienteDesconectado = new
+            {
+                Cep = "80420010",
+                Cidade = "Curitiba"
+            };
+
+            db.Attach(cliente);
+            db.Entry(cliente).CurrentValues.SetValues(clienteDesconectado);
             db.SaveChanges();
         }
     }
