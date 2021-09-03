@@ -1,1 +1,3 @@
-# Exemplo de aplicação utilizando o Entity Framework Core.
+# EFCoreSample
+
+Exemplo de aplicação utilizando o Entity Framework Core.
