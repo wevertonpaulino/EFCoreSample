@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EFCore.Migrations
+namespace EFCoreSample.Migrations
 {
     public partial class AtualizaProduto : Migration
     {

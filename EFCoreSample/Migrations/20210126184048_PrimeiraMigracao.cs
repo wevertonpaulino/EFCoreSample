@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EFCore.Migrations
+namespace EFCoreSample.Migrations
 {
     public partial class PrimeiraMigracao : Migration
     {

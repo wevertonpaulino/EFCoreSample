@@ -6,7 +6,7 @@ using EFCoreSample.Domain;
 using EFCoreSample.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFCore
+namespace EFCoreSample
 {
     class Program
     {

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EFCore.Migrations
+namespace EFCoreSample.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     [Migration("20210126205333_AdicionaEmail")]
